@@ -1,9 +1,14 @@
-<html>
-    <head>
-        <title>CoursEra AngularJS</title>
-     </head>
-     <body>
-         <h1>angularjs with coursera course</h1>
-         <p>This is my coursera content</p>
-     </body>    
-</hmml>
+<html ng-app="myModule">
+<head>
+	<h1>Hello</h1>
+	<script src="angular.js"></script>
+	<script src="app.js"></script>
+</head>
+<body>
+	<div ng-controller="MyController">
+		<p>PLease enter yor favourite food for lunch</p>
+		<input type="text" ng-model="foodSelect" />{{message}}
+		<br/><button ng-click="checkIfTooMuch()">Check If Too Much</button>
+	</div>
+</body>
+</html>
