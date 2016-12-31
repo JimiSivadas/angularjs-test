@@ -1,26 +1,24 @@
 var module = angular.module("myModule", []);
-module.controller("MyController", MainFn);
-function MainFn($scope) {
-    $scope.checkIfTooMuch = function () {
-        if ($scope.foodSelect != null) {
-            $scope.message = checkForQuantity($scope.foodSelect);
-        }
+module.factory("itemsList", function () {
+    var itemsList = [{ name: 'BOOK', quantity: '10' }, { name: 'PEN', quantity: '20' }, { name: 'PENCIL', quantity: '30' }, { name: 'CRAYON', quantity: '12' },
+    { name: 'CHALK', quantity: '2' }, { name: 'INK', quantity: '1' }, { name: 'ERASER', quantity: '30' }, { name: 'SHARPNER', quantity: '30' }];
+    return itemsList;
+});
+module.factory("boughtList", function () {
+    var boughtList = [];
+    return boughtList;
+});
+module.controller("InitListController", InitListControllerFn);
+'use.strict'
+function InitListControllerFn(itemsList, boughtList) {
+    this.itemsList = itemsList;
+    this.addToBoughtList = function (index) {
+        boughtList.push(itemsList[index]);
+        itemsList.splice(index, 1);
     };
-}
-function checkForQuantity(foodList) {
-    var count = 0;
-    var foods = foodList.split(',');
-    for (var i = 0; i < foods.length; i++) {
-        if (foods[i].trim() != '') {
-            count++;
-        }
-    }
-    if (foods.length <= 3) {
-        message = "Enjoy!";
-    } else {
-        message = "Too Much!";
-    }
-    return message;
-}
+};
 
-
+module.controller("BoughtListController", BoughtListControllerFn);
+function BoughtListControllerFn(boughtList) {
+    this.boughtList = boughtList;
+};
