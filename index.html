@@ -1,30 +1,18 @@
 <html ng-app="myModule">
 
 <head>
-	<h1>Shopping Checkout</h1>
+	<h1>Narrow It Down</h1>
 	<script src="angular.js"></script>
 	<script src="app.js"></script>
 </head>
 
 <body>
-	<div ng-controller="InitListController as ctr1">
-		<h2>To Buy </h2>
-		<p ng-if="ctr1.itemsList == ''" ><b>Everything is bought</b></p>
-		<ul ng-model="ctr1.itemsList">			
-			<li ng-repeat="data1 in ctr1.itemsList"> Buy   {{data1.quantity}} {{data1.name}}
-				<button ng-click="ctr1.addToBoughtList($index)" style="align:right">&nbsp;BOUGHT</button>
-			</li>
-		</ul>
-	</div>&nbsp;
-	<div ng-controller="BoughtListController as ctr2">
-		<h2>Already Bought</h2>
-		<p ng-if="ctr2.boughtList == ''" ><b>Nothing bought yet</b></p>
-		<ul ng-model="ctr2.boughtList">
-			<li ng-repeat="data2 in ctr2.boughtList track by $index"> {{data2.name}} {{data2.quantity}}
-			</li>
-		</ul>
-
-	</div>
+	
+	
+<div found-items></div>
+		
+		
+	
 </body>
 
 </html>

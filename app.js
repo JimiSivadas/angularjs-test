@@ -1,24 +1,71 @@
 var module = angular.module("myModule", []);
-module.factory("itemsList", function () {
-    var itemsList = [{ name: 'BOOK', quantity: '10' }, { name: 'PEN', quantity: '20' }, { name: 'PENCIL', quantity: '30' }, { name: 'CRAYON', quantity: '12' },
-    { name: 'CHALK', quantity: '2' }, { name: 'INK', quantity: '1' }, { name: 'ERASER', quantity: '30' }, { name: 'SHARPNER', quantity: '30' }];
-    return itemsList;
-});
-module.factory("boughtList", function () {
-    var boughtList = [];
-    return boughtList;
-});
-module.controller("InitListController", InitListControllerFn);
-'use.strict'
-function InitListControllerFn(itemsList, boughtList) {
-    this.itemsList = itemsList;
-    this.addToBoughtList = function (index) {
-        boughtList.push(itemsList[index]);
-        itemsList.splice(index, 1);
-    };
-};
+module.controller("NarrowItDownController", NarrowItDownControllerFn).service("MenuSearchService", MenuSearchServiceFn)
 
-module.controller("BoughtListController", BoughtListControllerFn);
-function BoughtListControllerFn(boughtList) {
-    this.boughtList = boughtList;
-};
+'use.strict'
+NarrowItDownControllerFn.$inject = ["MenuSearchService", "$scope"];
+
+function NarrowItDownControllerFn(MenuSearchService, $scope) {
+var ctr1=this;
+  ctr1.narrowIt = function () {
+    var searchItem = ctr1.searchItem;
+    if (searchItem == null) {
+     ctr1.emptyMessage = "Nothing Found!"
+    }
+    else {
+      ctr1.emptyMessage = " ";
+      var promise = MenuSearchService.getMatchedMenuItems(searchItem);
+      promise.then(function success(response) {
+        var menus = [];
+        angular.forEach(response.data.menu_items, function (value, key) {
+          var description = value.description;
+          if (description.indexOf(searchItem) !== -1) {
+            menus.push(value);
+          }
+        });
+        ctr1.foundMenuList = menus;
+        if (menus.length == 0) {
+          ctr1.emptyMessage = "Nothing Found!";
+        } else {
+          ctr1.emptyMessage = " ";
+        }
+      });
+    }
+
+    ctr1.removeDontWant = function (index) {     
+      ctr1.foundMenuList.splice(index,  1);    
+      if (ctr1.foundMenuList.length == 0) {
+        ctr1.emptyMessage = "Nothing Found!";
+      }
+    };
+
+  };
+}
+
+
+
+MenuSearchServiceFn.$inject = ['$http'];
+function MenuSearchServiceFn($http) { 
+  var service = this;
+  service.getMatchedMenuItems  = function (searchItem) {
+    
+    var menus = [];
+    var response = $http(
+      {
+        method: 'GET',
+        url: "https://davids-restaurant.herokuapp.com/menu_items.json"
+      });
+    return response;
+  };
+}
+
+module.directive('foundItems',function(){
+return {
+   templateUrl:'found-items.html',
+   controller:NarrowItDownControllerFn,
+   bindToController:true,
+   controllerAs:'ctr1',
+   scope: {
+      prop: '<',     
+       },
+    }
+});
