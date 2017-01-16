@@ -1,9 +1,24 @@
-<html>
-    <head>
-        <title>CoursEra AngularJS</title>
-     </head>
-     <body>
-         <h1>angularjs with coursera course</h1>
-         <p>This is my coursera content</p>
-     </body>    
-</hmml>
+<html ng-app="MenuApp">
+
+<head>
+	<h1>MENU</h1>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="angular.js"></script>
+	<script src="angular-ui-router.min.js"></script>
+	<script src="shoppinglist/javascript/menuapp.module.js"></script>	
+	
+	<script src="shoppinglist/javascript/routes.js"></script>
+	<script src="shoppinglist/javascript/categories.component.js"></script>
+	<script src="shoppinglist/javascript/items.component.js"></script>
+	<script src="shoppinglist/javascript/category-controller.js"></script>
+	<script src="shoppinglist/javascript/item-controller.js"></script>
+	<script src="shoppinglist/javascript/menudata-service.js"></script>
+
+</head>
+
+<body>
+
+<ui-view></ui-view>
+</body>
+
+</html>

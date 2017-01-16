@@ -1,0 +1,20 @@
+	
+<div ng-controller="NarrowItDownController  as ctr1">
+	<input type="textbox" ng-model="ctr1.searchItem" placeholder="Enter the value to be searched"	/>
+	<button ng-click="ctr1.narrowIt()">Narrow It Down</button>
+
+<table >
+<tr ng-repeat="data1 in ctr1.foundMenuList">
+<td>{{data1.name}} </td>
+<td>{{data1.short_name}}</td>
+<td>{{data1.description}}</td>
+<td>
+	<button  ng-click="ctr1.removeDontWant($index)">&nbsp;Don't want this one!</button>
+</td>
+</tr>
+</table>
+<p >{{ctr1.emptyMessage}}</p>
+		
+	</div>
+		
+		
