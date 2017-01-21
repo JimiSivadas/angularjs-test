@@ -1,0 +1,11 @@
+<html ng-app="public">
+  <head>
+    <meta charset="utf-8">    
+    <title>Simple Form Validation</title>
+  </head>
+<register-page user="regCtrl.user"  menus="regCtrl.menus" searched="regCtrl.searched"
+on-submit="regCtrl.submit(user,shortName);"></register-page>
+
+<p><h4 ng-if="regCtrl.completed==true">Your information has been saved.</h4></p>
+
+</html>

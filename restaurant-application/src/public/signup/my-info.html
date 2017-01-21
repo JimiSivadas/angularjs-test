@@ -1,0 +1,33 @@
+ <html ng-app="public">
+  <head>
+    <meta charset="utf-8">    
+    
+  </head>
+ <body ng-controller="SignUpController as signCtrl">
+<div  ng-if="signCtrl.user != undefined" class="container">
+ 
+<h1>My Information</h1>
+<p>Your firstname: {{signCtrl.user.firstname}}</p>
+<p>Your lastname: {{signCtrl.user.lastname}}</p>
+<p>Your email: {{signCtrl.user.email}}</p>
+<p>Your phone: {{signCtrl.user.phone}}</p>
+<p>
+<p>Your favourite menu item
+<p>Name: {{signCtrl.menuItems.data.name}}</p>
+<p>Description: {{signCtrl.menuItems.data.description}}</p>
+
+<div class="menu-item-photo">
+        <div>{{signCtrl.menuItems.data.short_name}}</div>
+        <img class="img-responsive" width="250" height="150" 
+        ng-src="{{signCtrl.basePath}}/images/{{signCtrl.menuItems.data.short_name}}.jpg" 
+        alt="{{signCtrl.menuItems.data.short_name}}">
+ </div>
+
+</div>
+
+<div  ng-if="signCtrl.user == undefined" class="container">
+ 
+<p>Not Signed Up Yet.  <a ui-sref="public.signup">Sign up Now!</a></p>
+</div>
+</body>
+ </html>
